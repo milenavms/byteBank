@@ -48,6 +48,7 @@ class FormularioTransferencia extends StatelessWidget {
                 fontSize: 20.0,
               ),
               decoration: InputDecoration(
+                icon: Icon(Icons.monetization_on),
                 labelText: 'Valor',
                 hintText: '0,00',
               ),
@@ -55,7 +56,9 @@ class FormularioTransferencia extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: null,
+            onPressed: () {
+              print('Clicou no corfirmar');
+            },
             child: Text('Confirmar'),
           ),
         ],
