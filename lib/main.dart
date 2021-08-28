@@ -7,24 +7,7 @@ void main() {
         appBar: AppBar(
           title: Text('Transferências'),
         ),
-        body: Column(
-          children: [
-            Card(
-              child: ListTile(
-                leading: Icon(Icons.monetization_on),
-                title: Text('100,00'),
-                subtitle: Text('100,00'),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Icon(Icons.monetization_on),
-                title: Text('500,00'),
-                subtitle: Text('200,00'),
-              ),
-            ),
-          ],
-        ),
+        body: ListaTransferencia(),
         floatingActionButton: FloatingActionButton(
           onPressed: null,
           child: Icon(Icons.add),
@@ -32,4 +15,29 @@ void main() {
       ),
     ),
   );
+}
+
+class ListaTransferencia extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.monetization_on),
+            title: Text('100,00'),
+            subtitle: Text('100,00'),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.monetization_on),
+            title: Text('500,00'),
+            subtitle: Text('500,00'),
+          ),
+        ),
+      ],
+    );
+    //throw UnimplementedError();
+  }
 }
