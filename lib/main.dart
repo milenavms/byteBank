@@ -2,31 +2,54 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Transferências'),
-        ),
-        body: ListaTransferencia(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: null,
-          child: Icon(Icons.add),
-        ),
-      ),
-    ),
+    ByteBanckApp(),
   );
 }
 
+//App
+class ByteBanckApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: FormularioTransferencia(),
+      ),
+    );
+  }
+}
+
+//Tela de Formulário de transferencia
+class FormularioTransferencia extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Criando Transferencias'),
+      ),
+      body: Text('Teste'),
+    );
+  }
+}
+
+//Tela Principal de Lista de Tranferencia.
 class ListaTransferencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ItemTransferencia(Transferencia(300.0, 01)),
-        ItemTransferencia(Transferencia(400.0, 02)),
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Transferências'),
+      ),
+      body: Column(
+        children: [
+          ItemTransferencia(Transferencia(300.0, 01)),
+          ItemTransferencia(Transferencia(400.0, 02)),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        child: Icon(Icons.add),
+      ),
     );
-    //throw UnimplementedError();
   }
 }
 
