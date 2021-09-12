@@ -114,9 +114,15 @@ class ListaTransferencia extends StatelessWidget {
       appBar: AppBar(
         title: Text('Transferências'),
       ),
-      body: Column(
+      body: ListView(
         children: [
           ItemTransferencia(Transferencia(300.0, 01)),
+          ItemTransferencia(Transferencia(400.0, 02)),
+          ItemTransferencia(Transferencia(300.0, 01)),
+          ItemTransferencia(Transferencia(400.0, 02)),
+          ItemTransferencia(Transferencia(300.0, 01)),
+          ItemTransferencia(Transferencia(400.0, 02)),
+          ItemTransferencia(Transferencia(400.0, 02)),
           ItemTransferencia(Transferencia(400.0, 02)),
         ],
       ),
