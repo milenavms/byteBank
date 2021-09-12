@@ -12,11 +12,15 @@ class ByteBanckApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: FormularioTransferencia(),
+        body: ListaTransferencia(),
       ),
     );
   }
 }
+
+/*
+ * TELA CRIA TRANSFERENCIAS 
+ */
 
 //Tela de Formulário de transferencia
 class FormularioTransferencia extends StatelessWidget {
@@ -43,8 +47,8 @@ class FormularioTransferencia extends StatelessWidget {
               dica: '000',
               icone: Icons.monetization_on),
           ElevatedButton(
-            onPressed: () =>
-                _criaTransferencia(), //button de criar transferencia
+            onPressed: () => _criaTransferencia(
+                context), //button de confirmar a criação da transferencia
             child: Text('Confirmar'),
           ),
         ],
@@ -52,13 +56,16 @@ class FormularioTransferencia extends StatelessWidget {
     );
   }
 
-  void _criaTransferencia() {
+  void _criaTransferencia(BuildContext context) {
     final int? numeroConta = int.tryParse(_controladorCampoNumeroConta.text);
     final double? valor = double.tryParse(_controladorCampoValor.text);
 
     if (numeroConta != null && valor != null) {
       final transferenciaCriada = Transferencia(valor, numeroConta);
+      debugPrint('Criando transferência');
       debugPrint('$transferenciaCriada');
+      Navigator.pop(context,
+          transferenciaCriada); //pop - Após Criar uma Transferencia, volta para a tela de Tranferencias.
     }
   }
 }
@@ -95,6 +102,10 @@ class Editor extends StatelessWidget {
   }
 }
 
+/*
+ *TELA LISTA TRANSFERENCIAS 
+ */
+
 //Tela Principal de Lista de Tranferencia.
 class ListaTransferencia extends StatelessWidget {
   @override
@@ -110,8 +121,21 @@ class ListaTransferencia extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
         child: Icon(Icons.add),
+        //buton de criar uma nova transferenia
+        onPressed: () {
+          final Future<Transferencia?>
+              future = //Tem acesso a uma possível resposta/retorno
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+            //rota/navegação
+            return FormularioTransferencia();
+          }));
+          future.then((transferenciaRecebida) {
+            //recebendo o valor
+            debugPrint('chegou no then do future');
+            debugPrint('$transferenciaRecebida');
+          });
+        },
       ),
     );
   }
