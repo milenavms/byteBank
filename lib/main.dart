@@ -106,25 +106,30 @@ class Editor extends StatelessWidget {
  *TELA LISTA TRANSFERENCIAS 
  */
 
-//Tela Principal de Lista de Tranferencia.
-class ListaTransferencia extends StatelessWidget {
+//Tela Principal de Lista de Tranferencia (Dinâmica).
+class ListaTransferencia extends StatefulWidget {
+  final List<Transferencia> _transferencias = [];
+
+  @override
+  State<StatefulWidget> createState() {
+    return ListaTransferenciaState();
+  }
+}
+
+class ListaTransferenciaState extends State<ListaTransferencia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Transferências'),
       ),
-      body: ListView(
-        children: [
-          ItemTransferencia(Transferencia(300.0, 01)),
-          ItemTransferencia(Transferencia(400.0, 02)),
-          ItemTransferencia(Transferencia(300.0, 01)),
-          ItemTransferencia(Transferencia(400.0, 02)),
-          ItemTransferencia(Transferencia(300.0, 01)),
-          ItemTransferencia(Transferencia(400.0, 02)),
-          ItemTransferencia(Transferencia(400.0, 02)),
-          ItemTransferencia(Transferencia(400.0, 02)),
-        ],
+      body: ListView.builder(
+        itemCount: widget._transferencias.length,
+        itemBuilder: (context, indice) {
+          final transferencia = widget._transferencias[indice];
+
+          return ItemTransferencia(transferencia);
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -140,10 +145,19 @@ class ListaTransferencia extends StatelessWidget {
             //recebendo o valor
             debugPrint('chegou no then do future');
             debugPrint('$transferenciaRecebida');
+            _atualiza(transferenciaRecebida!);
           });
         },
       ),
     );
+  }
+
+  void _atualiza(Transferencia transferenciaRecebida) {
+    if (transferenciaRecebida != null) {
+      setState(() {
+        widget._transferencias.add(transferenciaRecebida);
+      });
+    }
   }
 }
 
