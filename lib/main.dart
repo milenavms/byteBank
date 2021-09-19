@@ -23,7 +23,15 @@ class ByteBanckApp extends StatelessWidget {
  */
 
 //Tela de Formulário de transferencia
-class FormularioTransferencia extends StatelessWidget {
+class FormularioTransferencia extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return FormularioTransferenciaState();
+  }
+}
+
+//Tela de Formulário de transferencia - State
+class FormularioTransferenciaState extends State<FormularioTransferencia> {
   final TextEditingController _controladorCampoNumeroConta =
       new TextEditingController();
   final TextEditingController _controladorCampoValor =
@@ -35,23 +43,26 @@ class FormularioTransferencia extends StatelessWidget {
       appBar: AppBar(
         title: Text('Criando Transferencias'),
       ),
-      body: Column(
-        children: [
-          Editor(
-              controlador: _controladorCampoNumeroConta,
-              rotulo: 'Número Conta',
-              dica: '000'),
-          Editor(
-              controlador: _controladorCampoValor,
-              rotulo: 'Valor',
-              dica: '000',
-              icone: Icons.monetization_on),
-          ElevatedButton(
-            onPressed: () => _criaTransferencia(
-                context), //button de confirmar a criação da transferencia
-            child: Text('Confirmar'),
-          ),
-        ],
+      body: SingleChildScrollView(
+        //Lista com scroll
+        child: Column(
+          children: [
+            Editor(
+                controlador: _controladorCampoNumeroConta,
+                rotulo: 'Número Conta',
+                dica: '000'),
+            Editor(
+                controlador: _controladorCampoValor,
+                rotulo: 'Valor',
+                dica: '000',
+                icone: Icons.monetization_on),
+            ElevatedButton(
+              onPressed: () => _criaTransferencia(
+                  context), //button de confirmar a criação da transferencia
+              child: Text('Confirmar'),
+            ),
+          ],
+        ),
       ),
     );
   }
